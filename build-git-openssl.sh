@@ -4,6 +4,7 @@ set -euxo nounset
 
 d=$(mktemp -d)
 cd "$d"
+apt-get update -y
 apt-get install -y software-properties-common
 # The version of git that comes with Xenial (2.7.4) doesn't support shallow
 # clones from our github-mirror server, so use the latest officially supported
@@ -11,7 +12,7 @@ apt-get install -y software-properties-common
 add-apt-repository -y ppa:git-core/ppa
 sed -i 's|^# deb-src|deb-src|' /etc/apt/sources.list
 sed -i 's|^# deb-src|deb-src|' /etc/apt/sources.list.d/git-core-ubuntu-ppa-xenial.list
-apt-get update
+apt-get update -y
 
 # this is to get mk-build-deps which creates a virtual package that deps on the
 # build-deps of it's args, in this case git.
